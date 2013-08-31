@@ -1,0 +1,90 @@
+echo
+RESET='\x1B[0m'; BOLD='\x1B[1m'; RED='\x1B[31m'; GREEN='\x1B[32m'; YELLOW='\x1B[33m'; BLUE='\x1B[34m'; MAGENTA='\x1B[95m'; CYAN='\x1B[96m'
+BK_WHITE='\x1B[107m';BK_GREEN='\x1B[42m\x1B[97m';BK_RED='\x1B[41m\x1B[97m'
+
+function testme() {
+	echo "test me"
+}
+function echo_color() {
+	echo -e $@ ${RESET}
+}
+
+echo_color "Usage of command : ${BOLD}${GREEN}$1"
+
+function for_loop() {
+	echo_color "${YELLOW}# To implement a for loop:"
+	echo '
+	for file in `ls .`;
+	    do echo 'file';
+	    echo 'found';
+	done
+
+	# To implement a case command:
+	case "$1"
+	in
+	    0) echo "zero found";;
+	    1) echo "one found";;
+	    2) echo "two found";;
+	    3) echo "three found";;
+	esac
+	'
+	echo
+}
+
+function tar() {
+	echo_color
+	echo "Command not found..."
+}
+
+function not_found() {
+	echo_color "${RED}Command is not YET added into CheatSheet."
+	echo
+}
+
+function bash_command() {
+	echo $1
+}
+
+function version() {
+	bash_ver=`bash --version`
+	py_ver=`python --version 2>&1`
+	ruby_ver=`ruby --version`
+	java_ver=`java -version 2>&1`
+	echo_color "Bash Version is   : ${YELLOW}$bash_ver"
+	echo_color "Python Version is : ${YELLOW}$py_ver"
+	echo_color "Ruby Version is   : ${YELLOW}$ruby_ver"
+	echo_color "JAVA Version is   : ${YELLOW}$java_ver"
+	echo
+}
+
+function ssh_help() {
+	echo_color "${YELLOW} SSH command :"
+	echo '
+	# To execute a command on a remote server:
+	ssh -t user@example.com '\''the-remote-command'\''
+
+	# To tunnel an x session over SSH:
+	ssh -X user@example.com
+
+	# To launch a specific x application over SSH:
+	ssh -X -t user@example.com '\''chromium-browser'\''
+
+	# For more information, see:
+	# http://unix.stackexchange.com/q/12755/44856
+	'
+}
+
+while test $# != 0
+do
+    case "$1" in
+        "for") for_loop;;
+		"bash") shift 
+			bash_command $1;;
+        "ok") tar;;
+		"ssh") ssh_help;;
+		"version") version;;
+		*) not_found;;
+    esac
+    shift
+done
+
