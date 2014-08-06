@@ -7,8 +7,11 @@ Bash/Shell Command - CheatSheet
 =============
 
 $mkdir mydir
+
 $cd mydir
+
 $git clone https://github.com/pradeepbishnoi/cheatbook.git
+
 $cp cheat /usr/local/bin/
 
 
