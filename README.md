@@ -6,19 +6,19 @@ Bash/Shell Command - CheatSheet
 #How to Use :
 =============
 
-$mkdir mydir
+    $mkdir mydir
 
-$cd mydir
+    $cd mydir
 
-$git clone https://github.com/pradeepbishnoi/cheatbook.git
+    $git clone https://github.com/pradeepbishnoi/cheatbook.git
 
-$cp cheat /usr/local/bin/
+    $cp cheat /usr/local/bin/
 
 
-DONE!!!
+  DONE!!!
 
-Now you are just a command away to access the BASH command cheat sheet.
+  - Now you are just a command away to access the BASH command cheat sheet.
 
-$cheat version
+    $cheat version
 
-$cheat ssh_help
+    $cheat ssh_help
