@@ -17,6 +17,7 @@ Now you are just a command away to access the BASH command cheat sheet.
     $cheat version
 
 ![Cheat_Version](https://raw.githubusercontent.com/pradeepbishnoi/cheatbook/master/cheat_version.png)
-    $cheat ssh_help
+
+    $cheat ssh
 
 ![Cheat_SSH](https://raw.githubusercontent.com/pradeepbishnoi/cheatbook/master/cheat_ssh.png)
