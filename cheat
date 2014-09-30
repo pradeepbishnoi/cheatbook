@@ -71,6 +71,7 @@ function grep_help() {
     grep -iw "is" file.txt
     
     # To display the before/after/around the match using grep
+    
     <> Display 2 line after the grep matching line
     grep -A 2 -i "Search me" file.txt
 
@@ -82,6 +83,9 @@ function grep_help() {
     
     # Searching all file recursively for a pattern
     grep -r "search me" *
+    
+    # Show the line number for pattern matches
+    grep -n "search pattern" file.txt
     
     # Count the number of lines which matches the pattern
     grep -c "search pattern" file.txt
@@ -135,7 +139,10 @@ function list() {
     echo '
     
     bash
+    chown
+    chmod
     for
+    grep
     ssh
     tar
     version
