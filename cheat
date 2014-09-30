@@ -2,88 +2,213 @@ echo
 RESET='\x1B[0m'; BOLD='\x1B[1m'; RED='\x1B[31m'; GREEN='\x1B[32m'; YELLOW='\x1B[33m'; BLUE='\x1B[34m'; MAGENTA='\x1B[95m'; CYAN='\x1B[96m'
 BK_WHITE='\x1B[107m';BK_GREEN='\x1B[42m\x1B[97m';BK_RED='\x1B[41m\x1B[97m'
 
-function testme() {
-	echo "test me"
-}
 function echo_color() {
-	echo -e $@ ${RESET}
+    echo -e $@ ${RESET}
 }
 
 echo_color "Usage of command : ${BOLD}${GREEN}$1"
 
-function for_loop() {
-	echo_color "${YELLOW}# To implement a for loop:"
-	echo '
-	for file in `ls .`;
-	    do echo 'file';
-	    echo 'found';
-	done
-
-	# To implement a case command:
-	case "$1"
-	in
-	    0) echo "zero found";;
-	    1) echo "one found";;
-	    2) echo "two found";;
-	    3) echo "three found";;
-	esac
-	'
-	echo
+function chmod_help(){
+	echo_color "${YELLOW}# CHMOD command:"
+    echo '
+    
+    # To set the file permission Read/Write for Owner, Read for Group & Read for Everyone.
+    chmod 644 myfile.txt
+    
+    # To set the file permission Read/Write/Execute for Owner, Read/Write for Group & Read/Write for Everyone.
+    chmod 755 file.cgi
+    
+    # To set the file permission on a folder/subfolder & files.
+    chmod -R 755 mydir/my_sub_dir
+    '
 }
 
-function tar() {
-	echo_color
-	echo "Command not found..."
+function chown_help(){
+	echo_color "${YELLOW}# CHOWN command :"
+    echo '
+    
+    # To set the owner of a file to "pbishnoi"
+    chown pbishnoi file.txt
+    
+    # To set the owner & group of a file to "pbishnoi" & "mac_user"
+    chown pbishnoi:mac_user file.txt
+    
+    # To set the owner of a folder/subfolder & files.
+    chown -R pbishnoi mydir/my_sub_dir 
+    '
+}
+
+function for_loop() {
+    echo_color "${YELLOW}# To implement a for loop:"
+    echo '
+    for file in `ls .`;
+        do echo 'file';
+        echo 'found';
+    done
+    
+    # To implement a case command:
+    case "$1"
+    in
+        0) echo "zero found";;
+        1) echo "one found";;
+        2) echo "two found";;
+        3) echo "three found";;
+    esac
+    '
+    echo
+}
+
+function grep_help() {
+    echo_color "${YELLOW} GREP command :"
+    echo '
+    # To search a string (Search Me) in a file :
+    grep "Search Me" file.txt
+    
+    # To perform the case insensitive search :
+    grep -i "search" file.txt
+    
+    # To search for a full word (not a substring) :
+    grep -iw "is" file.txt
+    
+    # To display the before/after/around the match using grep
+    <> Display 2 line after the grep matching line
+    grep -A 2 -i "Search me" file.txt
+
+    <> Display 3 line before the grep matching line
+    grep -B 2 -i "Search me" file.txt
+
+    <> Display 2 line after the grep matching line
+    grep -C 2 -i "Search me" file.txt
+    
+    # Searching all file recursively for a pattern
+    grep -r "search me" *
+    
+    # Count the number of lines which matches the pattern
+    grep -c "search pattern" file.txt
+    
+    '
 }
 
 function not_found() {
-	echo_color "${RED}Command is not YET added into CheatSheet."
-	echo
+    echo
+    echo_color "\t${RED}Command is not YET added into CheatSheet."
+    echo
+    echo_color "\tUse command ${GREEN}'cheat list'${RESET} to list all the available commands"
+    echo
 }
 
 function bash_command() {
-	echo $1
+    echo $1
 }
 
 function version() {
-	bash_ver=`bash --version`
-	py_ver=`python --version 2>&1`
-	ruby_ver=`ruby --version`
-	java_ver=`java -version 2>&1`
-	echo_color "Bash Version is   : ${YELLOW}$bash_ver"
-	echo_color "Python Version is : ${YELLOW}$py_ver"
-	echo_color "Ruby Version is   : ${YELLOW}$ruby_ver"
-	echo_color "JAVA Version is   : ${YELLOW}$java_ver"
-	echo
+    bash_ver=`bash --version`
+    py_ver=`python --version 2>&1`
+    ruby_ver=`ruby --version`
+    java_ver=`java -version 2>&1`
+    echo_color "Bash Version is   : ${YELLOW}$bash_ver"
+    echo_color "Python Version is : ${YELLOW}$py_ver"
+    echo_color "Ruby Version is   : ${YELLOW}$ruby_ver"
+    echo_color "JAVA Version is   : ${YELLOW}$java_ver"
+    echo
 }
 
 function ssh_help() {
-	echo_color "${YELLOW} SSH command :"
-	echo '
-	# To execute a command on a remote server:
-	ssh -t user@example.com '\''the-remote-command'\''
+    echo_color "${YELLOW} SSH command :"
+    echo '
+    # To execute a command on a remote server:
+    ssh -t user@example.com '\''the-remote-command'\''
+    
+    # To tunnel an x session over SSH:
+    ssh -X user@example.com
+    
+    # To launch a specific x application over SSH:
+    ssh -X -t user@example.com '\''chromium-browser'\''
+    
+    # For more information, see:
+    # http://unix.stackexchange.com/q/12755/44856
+    '
+}
 
-	# To tunnel an x session over SSH:
-	ssh -X user@example.com
+function list() {
+    echo_color "${YELLOW} List all the available cheats :"
+    echo '
+    
+    bash
+    for
+    ssh
+    tar
+    version
+    zip
+    '
 
-	# To launch a specific x application over SSH:
-	ssh -X -t user@example.com '\''chromium-browser'\''
+}
 
-	# For more information, see:
-	# http://unix.stackexchange.com/q/12755/44856
-	'
+
+function tar_help() {
+    echo_color "${YELLOW} TAR command :"
+    echo '
+    # To create a new archive.tar using file1 & file2
+    tar -cf archive.tar file1 file2
+    
+    # To extract an archive.tar file in current directory
+    tar xf archive.tar
+    
+    # To extract a GZIP archive.tar.gz verbosely
+    tar xvzf archive.tar.gz
+    
+    # To compress the folder "mydir" and create an archive.tar
+    tar cf archive.tar mydir/
+    
+    # To extract all the *.txt file from an archive.tar file
+    tar xvf archive.tar --wildcards '*.txt'
+    
+    # To get the estimated size of an archive of a directory.
+    tar cf - documents/work/ | wc -c
+     
+    '
+}
+
+function zip_help() {
+    echo_color "${YELLOW} ZIP command :"
+    echo '
+    # To create a new archivefile.zip using file1 & file2
+    zip archivefile file1 file2
+    
+    # To create an archivefile.zip of all files in current directory & subdirectory
+    zip -r archivefile .
+    
+    '
+}
+
+function unzip_help(){
+    echo_color "${YELLOW} ZIP command :"
+    echo '
+    # To create a new archivefile.zip using file1 & file2
+    zip archivefile file1 file2
+    
+    # To create an archivefile.zip of all files in current directory & subdirectory
+    zip -r archivefile .
+    
+    '
+
 }
 
 while test $# != 0
 do
     case "$1" in
         "for") for_loop;;
-		"bash") shift 
-			bash_command $1;;
-        "ok") tar;;
-		"ssh") ssh_help;;
-		"version") version;;
-		*) not_found;;
+        "bash") shift 
+            bash_command $1;;
+        "chmod") chmod_help;;
+        "chown") chown_help;;
+        "grep") grep_help;;
+        "list") list;;
+        "ssh") ssh_help;;
+        "tar") tar_help;;
+        "version") version;;
+        "zip") zip_help;;
+        *) not_found;;
     esac
     shift
 done
